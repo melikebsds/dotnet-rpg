@@ -1,12 +1,15 @@
 global using dotnet_rpg.Data;
 global using dotnet_rpg.Models;
 global using dotnet_rpg.Services.CharacterService;
+global using dotnet_rpg.Services.WeaponService;
+global using dotnet_rpg.Services.FightService;
 global using dotnet_rpg.Dtos.Character;
 global using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.OpenApi.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +47,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddHttpContextAccessor(); 
+builder.Services.AddScoped<IWeaponService, WeaponService>();
+builder.Services.AddScoped<IFightService, FightService>();
 
 var app = builder.Build();
 
